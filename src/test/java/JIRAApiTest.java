@@ -23,7 +23,7 @@ public class JIRAApiTest {
                         then().
                         extract().response();
 
-        assertEquals(200, response.statusCode());
+        assertEquals(response.statusCode(), 200);
         assertEquals("WEBINAR-8887", response.path("key"));
         final Matcher<String> matcher = new MatchesPattern(Pattern.compile("[A-Z]+\\-[0-9]+"));
         assertTrue(matcher.matches("WEBINAR-8887"));
@@ -33,16 +33,11 @@ public class JIRAApiTest {
     @Test
     public void createIssue() {
 
-        String issueJSON = "{\"fields\":{" +
-                "\"summary\":\"Test summary\"," +
-                "\"issuetype\":{\"id\":\"10107\"}," +
-                "\"project\":{\"id\":\"11400\"}," +
-                "\"assignee\":{\"name\":\"webinar5\"}" +
-                "}}";
+        String issueJSON = JiraJSONObjects.newIssueJSON();
 
         Response response = given().
                 auth().preemptive().basic("webinar5", "webinar5").
-                header("Content-Type","application/json").
+                header("Content-Type", "application/json").
                 body(issueJSON).
                 when().
                 post("https://jira.hillel.it/rest/api/2/issue").
