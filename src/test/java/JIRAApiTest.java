@@ -32,18 +32,8 @@ public class JIRAApiTest {
 
     @Test
     public void createIssue() {
-
-        String issueJSON = JiraJSONObjects.newIssueJSON();
-
-        Response response = given().
-                auth().preemptive().basic("webinar5", "webinar5").
-                header("Content-Type", "application/json").
-                body(issueJSON).
-                when().
-                post("https://jira.hillel.it/rest/api/2/issue").
-                then().
-                extract().response();
-
+        Response response = JiraAPISteps.createIssue();
         assertEquals(201, response.statusCode());
+        response.then().extract().path("key");
     }
 }
