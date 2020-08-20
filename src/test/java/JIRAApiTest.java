@@ -1,4 +1,6 @@
+import io.restassured.http.Cookies;
 import io.restassured.response.Response;
+import io.restassured.response.ResponseOptions;
 import org.hamcrest.Matcher;
 import org.hamcrest.text.MatchesPattern;
 import org.testng.annotations.Test;
@@ -22,6 +24,8 @@ public class JIRAApiTest {
                         get("http://jira.hillel.it/rest/api/2/issue/WEBINAR-9060").
                         then().
                         extract().response();
+
+        Cookies coockies = response.getDetailedCookies();
 
         assertEquals(response.statusCode(), 200);
         assertEquals("WEBINAR-9060", response.path("key"));
