@@ -19,14 +19,14 @@ public class JIRAApiTest {
                 given().
                         auth().preemptive().basic("webinar5", "webinar5").
                         when().
-                        get("http://jira.hillel.it/rest/api/2/issue/WEBINAR-8887").
+                        get("http://jira.hillel.it/rest/api/2/issue/WEBINAR-9060").
                         then().
                         extract().response();
 
         assertEquals(response.statusCode(), 200);
-        assertEquals("WEBINAR-8887", response.path("key"));
+        assertEquals("WEBINAR-9060", response.path("key"));
         final Matcher<String> matcher = new MatchesPattern(Pattern.compile("[A-Z]+\\-[0-9]+"));
-        assertTrue(matcher.matches("WEBINAR-8887"));
+        assertTrue(matcher.matches("WEBINAR-9060"));
     }
 
 
