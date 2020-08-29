@@ -34,10 +34,11 @@ public class JIRAApiTest {
     }
 
 
-    @Test
-    public void createIssue() {
-        Response response = JiraAPISteps.createIssue();
-        assertEquals(201, response.statusCode());
-        response.then().extract().path("key");
-    }
+//    @Test
+//    public void createIssue() {
+//        Response response = JiraAPISteps.createIssue();
+//        assertEquals(201, response.statusCode());
+//        response.then().extract().path("key");
+//    }
+    // TODO Delete issue after it was created
 }
